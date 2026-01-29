@@ -13,7 +13,7 @@ CORS(app)
 
 # MongoDB Configuration
 MONGO_URI = os.getenv("MONGO_URI", "mongodb://localhost:27017/")
-DB_NAME = "techstax_db"
+DB_NAME = "webhook_events_db"
 COLLECTION_NAME = "events"
 
 try:
@@ -123,16 +123,11 @@ def get_events():
     if collection is None:
         return jsonify([])
     
-    # Fetch latest 10 events, sorted by _id (approx timestamp) descending
-    # Or strict timestamp if we can parse it, but _id is natural order usually.
-    # The requirement says "latest changes".
     events = list(collection.find({}, {'_id': 0}).sort('_id', -1).limit(20))
     return jsonify(events)
 
 def _format_dt(iso_str):
     # Ensure standard format (e.g., "1st April 2021 - 9:30 PM UTC")
-    # The prompt requests a specific format like "1st April 2021 - 9:30 PM UTC"
-    # We will try to parse input and reformat.
     if not iso_str:
         return _get_current_utc_str()
     
@@ -155,5 +150,5 @@ def _custom_strftime(dt):
     return date_str
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 5000))
-    app.run(debug=True, port=port)
+    port = int(os.environ.get('PORT', 8000))
+    app.run(debug=True, host='0.0.0.0', port=port)

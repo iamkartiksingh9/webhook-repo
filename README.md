@@ -1,6 +1,6 @@
 # Webhook Receiver Repo
 
-This project implements the `webhook-repo` for the TechStax assessment. It receives Github Actions webhooks, stores them in MongoDB, and displays them in a live-updating UI.
+This project implements a Github Webhook receiver by `iamkartiksingh9`. It receives Github Actions webhooks, stores them in MongoDB, and displays them in a live-updating UI.
 
 ## Prerequisites
 - Python 3.x
@@ -33,7 +33,7 @@ This project implements the `webhook-repo` for the TechStax assessment. It recei
    ```bash
    python3 app.py
    ```
-3. Open `http://localhost:5000` in your browser.
+3. Open `http://localhost:8000` in your browser.
 
 ## Testing with Simulator
 Since connecting a real Github repo to localhost requires tunneling (Ngrok), a simulator script is provided.
@@ -43,7 +43,7 @@ Since connecting a real Github repo to localhost requires tunneling (Ngrok), a s
    ```bash
    python3 simulate_webhook.py
    ```
-3. Watch the UI at `http://localhost:5000` update automatically.
+3. Watch the UI at `http://localhost:8000` update automatically.
 
 ## Project Structure
 - `app.py`: Flask backend & MongoDB logic.
